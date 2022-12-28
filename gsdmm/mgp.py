@@ -7,7 +7,7 @@ TopicWords = Dict[Any, str]
 
 
 class MovieGroupProcess:
-    # pylint: disable=invalid-name
+    # pylint: disable=invalid-name,too-many-instance-attributes
     def __init__(self, K=8, alpha=0.1, beta=0.1, n_iters=30):
         """
         A MovieGroupProcess is a conceptual model introduced by Yin and Wang 2014 to
@@ -48,7 +48,7 @@ class MovieGroupProcess:
         self.cluster_word_count = [0 for _ in range(K)]
         self.cluster_word_distribution = [{} for i in range(K)]
 
-    # pylint: disable=invalid-name
+    # pylint: disable=invalid-name,too-many-arguments
     @staticmethod
     def from_data(
         K,
