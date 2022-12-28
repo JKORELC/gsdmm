@@ -100,7 +100,7 @@ class MovieGroupProcess:
         :return: list of length len(doc)
             cluster label for each document
         """
-        # pylint: disable=invalid-name
+        # pylint: disable=invalid-name,too-many-locals
         _, __, K, n_iters, ___ = (
             self.alpha,
             self.beta,
@@ -187,7 +187,7 @@ class MovieGroupProcess:
         self.cluster_word_distribution = n_z_w
         return d_z
 
-    def score(self, doc):
+    def score(self, doc):  # pylint: disable=too-many-locals
         """
         Score a document
 
