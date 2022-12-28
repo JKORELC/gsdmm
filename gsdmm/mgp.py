@@ -1,3 +1,8 @@
+"""
+This module implements the Gibbs sampling algorithm for a Dirichlet Mixture Model (GSDMM)
+of Yin and Wang 2014 for the clustering of short text documents.
+"""
+
 from typing import Any, Dict
 from numpy.random import multinomial
 from numpy import argmax, log, exp, array as np_array
