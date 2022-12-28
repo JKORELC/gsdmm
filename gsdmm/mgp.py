@@ -7,6 +7,10 @@ TopicWords = Dict[Any, str]
 
 
 class MovieGroupProcess:
+    """
+    This class implements the Gibbs sampling algorithm for a Dirichlet Mixture Model (GSDMM)
+    of Yin and Wang 2014 for the clustering of short text documents.
+    """
     # pylint: disable=invalid-name,too-many-instance-attributes
     def __init__(self, K=8, alpha=0.1, beta=0.1, n_iters=30):
         """
