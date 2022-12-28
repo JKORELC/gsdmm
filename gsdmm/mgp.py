@@ -208,6 +208,9 @@ class MovieGroupProcess:
         return argmax(p),max(p)
 
     def get_top_words(self, k_words: int = 5, merge_token: str = " ") -> TopicWords:
+        '''
+        Filter the top k_words entries per cluster using merge_token as a separator.
+        '''
         doc_count = np_array(self.cluster_doc_count)
         top_index = doc_count.argsort()[-self.K:][::-1]
         topic_words: TopicWords = {}
