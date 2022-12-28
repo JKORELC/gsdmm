@@ -29,10 +29,12 @@ class MovieGroupProcess:
             Alpha controls the probability that a student will join a table that is currently empty
             When alpha is 0, no one will join an empty table.
         :param beta: float between 0 and 1
-            Beta controls the student's affinity for other students with similar interests. A low beta means
-            that students desire to sit with students of similar interests. A high beta means they are less
-            concerned with affinity and are more influenced by the popularity of a table
+            Beta controls the student's affinity for other students with similar interests.
+            A low beta means that students desire to sit with students of similar interests.
+            A high beta means they are less concerned with affinity and are more influenced
+            by the popularity of a table.
         :param n_iters:
+            Number of iterations to resolve cluster definitions.
         """
         self.K = K  # pylint: disable=invalid-name
         self.alpha = alpha
