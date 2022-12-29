@@ -1,3 +1,8 @@
+"""
+This module implements the Gibbs sampling algorithm for a Dirichlet Mixture Model (GSDMM)
+of Yin and Wang 2014 for the clustering of short text documents.
+"""
+
 from typing import Any, Dict
 from numpy.random import multinomial
 from numpy import argmax, log, exp, array as np_array
@@ -7,7 +12,11 @@ TopicWords = Dict[Any, str]
 
 
 class MovieGroupProcess:
-    # pylint: disable=invalid-name
+    """
+    This class implements the Gibbs sampling algorithm for a Dirichlet Mixture Model (GSDMM)
+    of Yin and Wang 2014 for the clustering of short text documents.
+    """
+    # pylint: disable=invalid-name,too-many-instance-attributes
     def __init__(self, K=8, alpha=0.1, beta=0.1, n_iters=30):
         """
         A MovieGroupProcess is a conceptual model introduced by Yin and Wang 2014 to
@@ -29,10 +38,12 @@ class MovieGroupProcess:
             Alpha controls the probability that a student will join a table that is currently empty
             When alpha is 0, no one will join an empty table.
         :param beta: float between 0 and 1
-            Beta controls the student's affinity for other students with similar interests. A low beta means
-            that students desire to sit with students of similar interests. A high beta means they are less
-            concerned with affinity and are more influenced by the popularity of a table
+            Beta controls the student's affinity for other students with similar interests.
+            A low beta means that students desire to sit with students of similar interests.
+            A high beta means they are less concerned with affinity and are more influenced
+            by the popularity of a table.
         :param n_iters:
+            Number of iterations to resolve cluster definitions.
         """
         self.K = K  # pylint: disable=invalid-name
         self.alpha = alpha
@@ -46,7 +57,7 @@ class MovieGroupProcess:
         self.cluster_word_count = [0 for _ in range(K)]
         self.cluster_word_distribution = [{} for i in range(K)]
 
-    # pylint: disable=invalid-name
+    # pylint: disable=invalid-name,too-many-arguments
     @staticmethod
     def from_data(
         K,
@@ -98,7 +109,7 @@ class MovieGroupProcess:
         :return: list of length len(doc)
             cluster label for each document
         """
-        # pylint: disable=invalid-name
+        # pylint: disable=invalid-name,too-many-locals
         _, __, K, n_iters, ___ = (
             self.alpha,
             self.beta,
@@ -169,10 +180,10 @@ class MovieGroupProcess:
                         n_z_w[z_new][word] = 0
                     n_z_w[z_new][word] += 1
 
-            cluster_count_new = sum([1 for v in m_z if v > 0])
+            cluster_count_new = sum(v > 0 for v in m_z)
             print(
-                "In stage %d: transferred %d clusters with %d clusters populated"
-                % (_iter, total_transfers, cluster_count_new)
+                f"In stage {_iter}: transferred {total_transfers} clusters "\
+                f"with {cluster_count_new} clusters populated"
             )
             if (
                 total_transfers == 0
@@ -185,7 +196,7 @@ class MovieGroupProcess:
         self.cluster_word_distribution = n_z_w
         return d_z
 
-    def score(self, doc):
+    def score(self, doc):  # pylint: disable=too-many-locals
         """
         Score a document
 
