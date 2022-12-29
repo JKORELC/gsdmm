@@ -16,6 +16,7 @@ class MovieGroupProcess:
     This class implements the Gibbs sampling algorithm for a Dirichlet Mixture Model (GSDMM)
     of Yin and Wang 2014 for the clustering of short text documents.
     """
+
     # pylint: disable=invalid-name,too-many-instance-attributes
     def __init__(self, K=8, alpha=0.1, beta=0.1, n_iters=30):
         """
@@ -182,7 +183,7 @@ class MovieGroupProcess:
 
             cluster_count_new = sum(v > 0 for v in m_z)
             print(
-                f"In stage {_iter}: transferred {total_transfers} clusters "\
+                f"In stage {_iter}: transferred {total_transfers} clusters "
                 f"with {cluster_count_new} clusters populated"
             )
             if (
@@ -257,9 +258,9 @@ class MovieGroupProcess:
         return argmax(p), max(p)
 
     def get_top_words(self, k_words: int = 5, merge_token: str = " ") -> TopicWords:
-        '''
+        """
         Filter the top k_words entries per cluster using merge_token as a separator.
-        '''
+        """
         doc_count = np_array(self.cluster_doc_count)
         top_index = doc_count.argsort()[-self.K :][::-1]
         topic_words: TopicWords = {}
