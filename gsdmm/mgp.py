@@ -182,8 +182,8 @@ class MovieGroupProcess:
 
             cluster_count_new = sum(v > 0 for v in m_z)
             print(
-                "In stage %d: transferred %d clusters with %d clusters populated"
-                % (_iter, total_transfers, cluster_count_new)
+                f"In stage {_iter}: transferred {total_transfers} clusters "\
+                f"with {cluster_count_new} clusters populated"
             )
             if (
                 total_transfers == 0
